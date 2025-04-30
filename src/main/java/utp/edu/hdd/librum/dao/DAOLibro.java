@@ -39,7 +39,6 @@ public class DAOLibro {
         }
     }
 
-    // Leer - Listar todos los libros
     public List<DTOLibro> listarLibros() {
         daoConexion.Conectar();
         List<DTOLibro> lista = new ArrayList<>();
@@ -71,7 +70,6 @@ public class DAOLibro {
         return lista;
     }
 
-    // Actualizar libro
     public boolean actualizarLibro(DTOLibro libro) {
         daoConexion.Conectar();
         String sql = "UPDATE libro SET titulo = ?, descripcion = ?, autor = ?, genero = ? WHERE isbn = ?";
@@ -96,7 +94,6 @@ public class DAOLibro {
         }
     }
 
-    // Eliminar libro
     public boolean eliminarLibro(String Isbn) {
         daoConexion.Conectar();
         String sql = "DELETE FROM libro WHERE isbn = ?";
@@ -117,7 +114,6 @@ public class DAOLibro {
         }
     }
 
-    // Buscar libro por ISBN
     public DTOLibro buscarLibroPorIsbn(String Isbn) {
         daoConexion.Conectar();
         String sql = "SELECT * FROM libro WHERE isbn = ?";

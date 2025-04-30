@@ -1,9 +1,5 @@
 package utp.edu.hdd.librum.dto;
 
-/**
- *
- * @author #RoaAlyc '^'
- */
 public class DTOLibro {
 
     private String isbn;
