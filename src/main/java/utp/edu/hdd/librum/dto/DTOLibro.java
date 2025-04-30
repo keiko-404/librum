@@ -6,29 +6,29 @@ package utp.edu.hdd.librum.dto;
  */
 public class DTOLibro {
 
-    private String id;
+    private String isbn;
     private String titulo;
+    private String descripcion;
     private String autor;
     private String genero;
-    private boolean disponible;
 
     public DTOLibro() {
     }
 
-    public DTOLibro(String id, String titulo, String autor, String genero, boolean disponible) {
-        this.id = id;
+    public DTOLibro(String isbn, String titulo, String descripcion, String autor, String genero) {
+        this.isbn = isbn;
         this.titulo = titulo;
+        this.descripcion = descripcion;
         this.autor = autor;
         this.genero = genero;
-        this.disponible = disponible;
     }
 
-    public String getId() {
-        return id;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitulo() {
@@ -37,6 +37,14 @@ public class DTOLibro {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getAutor() {
@@ -53,14 +61,6 @@ public class DTOLibro {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public boolean isDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
     }
 
 }

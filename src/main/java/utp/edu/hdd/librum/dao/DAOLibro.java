@@ -1,9 +1,13 @@
 
 package utp.edu.hdd.librum.dao;
-import utp.edu.hdd.librum.dto.DTOLibro;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import utp.edu.hdd.librum.dto.DTOLibro;
 public class DAOLibro {
     private DAOConexion daoConexion;
     
@@ -11,15 +15,15 @@ public class DAOLibro {
     daoConexion =new DAOConexion();
     
     }   
-     public boolean insertarLibro(DTOLibro libro) {
+    public boolean insertarLibro(DTOLibro libro) {
         daoConexion.Conectar();
-        String sql = "INSERT INTO libros (id, titulo, autor, genero, disponible) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO libro (isbn, titulo, descripcion, autor, genero) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = daoConexion.getConexion().prepareStatement(sql)) {
-            stmt.setString(1, libro.getId());
+            stmt.setString(1, libro.getIsbn());
             stmt.setString(2, libro.getTitulo());
-            stmt.setString(3, libro.getAutor());
-            stmt.setString(4, libro.getGenero());
-            stmt.setBoolean(5, libro.isDisponible());
+            stmt.setString(3, libro.getDescripcion());
+            stmt.setString(4, libro.getAutor());
+            stmt.setString(5, libro.getGenero());
 
             int filasInsertadas = stmt.executeUpdate();
             return filasInsertadas > 0;
@@ -39,18 +43,19 @@ public class DAOLibro {
     public List<DTOLibro> listarLibros() {
         daoConexion.Conectar();
         List<DTOLibro> lista = new ArrayList<>();
-        String sql = "SELECT * FROM libros";
+        String sql = "SELECT * FROM libro";
 
         try (Statement stmt = daoConexion.getConexion().createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+            ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 DTOLibro libro = new DTOLibro(
-                        rs.getString("id"),
+                        rs.getString("isbn"),
                         rs.getString("titulo"),
+                        rs.getString("descripcion"),
                         rs.getString("autor"),
-                        rs.getString("genero"),
-                        rs.getBoolean("disponible")
+                        rs.getString("genero")
+
                 );
                 lista.add(libro);
             }
@@ -69,13 +74,13 @@ public class DAOLibro {
     // Actualizar libro
     public boolean actualizarLibro(DTOLibro libro) {
         daoConexion.Conectar();
-        String sql = "UPDATE libros SET titulo = ?, autor = ?, genero = ?, disponible = ? WHERE id = ?";
+        String sql = "UPDATE libro SET titulo = ?, descripcion = ?, autor = ?, genero = ? WHERE isbn = ?";
         try (PreparedStatement stmt = daoConexion.getConexion().prepareStatement(sql)) {
             stmt.setString(1, libro.getTitulo());
             stmt.setString(2, libro.getAutor());
-            stmt.setString(3, libro.getGenero());
-            stmt.setBoolean(4, libro.isDisponible());
-            stmt.setString(5, libro.getId());
+            stmt.setString(3, libro.getDescripcion());
+            stmt.setString(4, libro.getGenero());
+            stmt.setString(5, libro.getIsbn());
 
             int filasActualizadas = stmt.executeUpdate();
             return filasActualizadas > 0;
@@ -92,11 +97,11 @@ public class DAOLibro {
     }
 
     // Eliminar libro
-    public boolean eliminarLibro(String Id) {
+    public boolean eliminarLibro(String Isbn) {
         daoConexion.Conectar();
-        String sql = "DELETE FROM libros WHERE id = ?";
+        String sql = "DELETE FROM libro WHERE isbn = ?";
         try (PreparedStatement stmt = daoConexion.getConexion().prepareStatement(sql)) {
-            stmt.setString(1, Id);
+            stmt.setString(1, Isbn);
 
             int filasEliminadas = stmt.executeUpdate();
             return filasEliminadas > 0;
@@ -113,20 +118,20 @@ public class DAOLibro {
     }
 
     // Buscar libro por ISBN
-    public DTOLibro buscarLibroPorIsbn(String Id) {
+    public DTOLibro buscarLibroPorIsbn(String Isbn) {
         daoConexion.Conectar();
-        String sql = "SELECT * FROM libros WHERE id = ?";
+        String sql = "SELECT * FROM libro WHERE isbn = ?";
         try (PreparedStatement stmt = daoConexion.getConexion().prepareStatement(sql)) {
-            stmt.setString(1, Id);
+            stmt.setString(1, Isbn);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 return new DTOLibro(
-                        rs.getString("id"),
+                        rs.getString("isbn"),
                         rs.getString("titulo"),
+                        rs.getString("descripcion"),
                         rs.getString("autor"),
-                        rs.getString("genero"),
-                        rs.getBoolean("disponible")
+                        rs.getString("genero")
                 );
             }
         } catch (SQLException e) {

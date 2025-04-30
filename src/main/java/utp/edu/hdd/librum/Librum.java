@@ -25,18 +25,18 @@ public class Librum {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("ID: ");
-                    String id = scanner.nextLine();
+                    System.out.print("Isbn: ");
+                    String isbn = scanner.nextLine();
                     System.out.print("Título: ");
                     String titulo = scanner.nextLine();
+                    System.out.print("descripcion: ");
+                    String descripcion = scanner.nextLine();
                     System.out.print("Autor: ");
                     String autor = scanner.nextLine();
                     System.out.print("Género: ");
                     String genero = scanner.nextLine();
-                    System.out.print("¿Disponible? (true/false): ");
-                    boolean disponible = Boolean.parseBoolean(scanner.nextLine());
 
-                    DTOLibro nuevoLibro = new DTOLibro(id, titulo, autor, genero, disponible);
+                    DTOLibro nuevoLibro = new DTOLibro(isbn, titulo, descripcion, autor, genero);
                     if (dao.insertarLibro(nuevoLibro)) {
                         System.out.println("Libro insertado correctamente.");
                     } else {
@@ -50,20 +50,20 @@ public class Librum {
                         System.out.println("No hay libros registrados.");
                     } else {
                         for (DTOLibro libro : libros) {
-                            System.out.println("ID: " + libro.getId());
+                            System.out.println("Isbn: " + libro.getIsbn());
                             System.out.println("Título: " + libro.getTitulo());
+                            System.out.println("Descripcion: " + libro.getDescripcion());
                             System.out.println("Autor: " + libro.getAutor());
                             System.out.println("Género: " + libro.getGenero());
-                            System.out.println("Disponible: " + (libro.isDisponible() ? "Sí" : "No"));
                             System.out.println("---------------------------");
                         }
                     }
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el ID del libro a actualizar: ");
-                    String idActualizar = scanner.nextLine();
-                    DTOLibro libroExistente = dao.buscarLibroPorIsbn(idActualizar);
+                    System.out.print("Ingrese el Isbn del libro a actualizar: ");
+                    String isbnActualizar = scanner.nextLine();
+                    DTOLibro libroExistente = dao.buscarLibroPorIsbn(isbnActualizar);
 
                     if (libroExistente != null) {
                         System.out.println("Deja el campo vacío si no deseas modificarlo.");
@@ -72,6 +72,12 @@ public class Librum {
                         String nuevoTitulo = scanner.nextLine();
                         if (!nuevoTitulo.isEmpty()) {
                             libroExistente.setTitulo(nuevoTitulo);
+                        }
+
+                        System.out.print("Nueva descripcion (actual: " + libroExistente.getDescripcion() + "): ");
+                        String nuevaDescripcion = scanner.nextLine();
+                        if (!nuevaDescripcion.isEmpty()) {
+                            libroExistente.setDescripcion(nuevaDescripcion);
                         }
 
                         System.out.print("Nuevo autor (actual: " + libroExistente.getAutor() + "): ");
@@ -84,12 +90,6 @@ public class Librum {
                         String nuevoGenero = scanner.nextLine();
                         if (!nuevoGenero.isEmpty()) {
                             libroExistente.setGenero(nuevoGenero);
-                        }
-
-                        System.out.print("¿Disponible? (true/false) (actual: " + libroExistente.isDisponible() + "): ");
-                        String disponibleInput = scanner.nextLine();
-                        if (!disponibleInput.isEmpty()) {
-                            libroExistente.setDisponible(Boolean.parseBoolean(disponibleInput));
                         }
 
                         if (dao.actualizarLibro(libroExistente)) {
