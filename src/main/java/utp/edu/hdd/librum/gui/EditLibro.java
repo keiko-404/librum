@@ -109,7 +109,9 @@ public class EditLibro extends javax.swing.JFrame {
         });
 
         jTextArea2.setColumns(20);
+        jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
+        jTextArea2.setWrapStyleWord(true);
         jScrollPane2.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);

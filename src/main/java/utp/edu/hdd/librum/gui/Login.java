@@ -4,6 +4,8 @@
  */
 package utp.edu.hdd.librum.gui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LAB-USR-CHIMBOTE
@@ -15,6 +17,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -33,9 +37,9 @@ public class Login extends javax.swing.JFrame {
         JUsario = new javax.swing.JLabel();
         JContraseña = new javax.swing.JLabel();
         JTxtUsuario = new javax.swing.JTextField();
-        JTxTContraseña = new javax.swing.JTextField();
         JBtonIngresar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        JTxTContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,12 +66,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        JTxTContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTxTContraseñaActionPerformed(evt);
-            }
-        });
-
         JBtonIngresar.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         JBtonIngresar.setText("INGRESAR");
         JBtonIngresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -88,20 +86,21 @@ public class Login extends javax.swing.JFrame {
             .addGroup(BackgroundLayout.createSequentialGroup()
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackgroundLayout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(JUsario, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTxTContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(BackgroundLayout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(JContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
-                                .addComponent(JBtonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)))))
-                .addContainerGap(289, Short.MAX_VALUE))
+                            .addGroup(BackgroundLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(JBtonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(BackgroundLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(JTxTContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(BackgroundLayout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(JUsario, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(JTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(288, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundLayout.createSequentialGroup()
                 .addContainerGap(330, Short.MAX_VALUE)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,14 +131,14 @@ public class Login extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JUsario)
-                    .addComponent(JTxTContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(JTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JContraseña)
-                    .addComponent(JTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(JTxTContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(JBtonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,18 +160,19 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JTxtUsuarioActionPerformed
 
-    private void JTxTContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTxTContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTxTContraseñaActionPerformed
-
     private void JBtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtonIngresarActionPerformed
-       String usuario = JTxtUsuario.getText().trim();
-    String contrasena = JTxTContraseña.getText().trim();
-    
-    Principal principal = new Principal();
-    principal.setVisible(true); // Muestra el formulario Principal
-    this.dispose();
-    setLocationRelativeTo(null);
+        String usuario = JTxtUsuario.getText().trim();
+        String contrasena = JTxTContraseña.getText().trim();
+
+        // Validar usuario y contraseña
+        if (usuario.equals("admin") && contrasena.equals("123")) {
+            Principal principal = new Principal();
+            principal.setVisible(true); // Muestra el formulario Principal
+            this.dispose(); // Cierra la ventana actual
+            principal.setLocationRelativeTo(null); // Centra la nueva ventana
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_JBtonIngresarActionPerformed
 
@@ -231,7 +231,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton JBtonIngresar;
     private javax.swing.JLabel JContraseña;
     private javax.swing.JLabel JIniciarSesion;
-    private javax.swing.JTextField JTxTContraseña;
+    private javax.swing.JPasswordField JTxTContraseña;
     private javax.swing.JTextField JTxtUsuario;
     private javax.swing.JLabel JUsario;
     private javax.swing.JLabel jLabel2;
