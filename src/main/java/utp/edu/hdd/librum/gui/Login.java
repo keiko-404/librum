@@ -1,20 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package utp.edu.hdd.librum.gui;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author LAB-USR-CHIMBOTE
- */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login1
-     */
     public Login() {
         initComponents();
 
@@ -164,12 +153,11 @@ public class Login extends javax.swing.JFrame {
         String usuario = JTxtUsuario.getText().trim();
         String contrasena = JTxTContraseña.getText().trim();
 
-        // Validar usuario y contraseña
         if (usuario.equals("admin") && contrasena.equals("123")) {
             Principal principal = new Principal();
-            principal.setVisible(true); // Muestra el formulario Principal
-            this.dispose(); // Cierra la ventana actual
-            principal.setLocationRelativeTo(null); // Centra la nueva ventana
+            principal.setVisible(true);
+            this.dispose();
+            principal.setLocationRelativeTo(null);
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
         }

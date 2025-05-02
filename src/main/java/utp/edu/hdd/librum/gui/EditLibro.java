@@ -1,45 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package utp.edu.hdd.librum.gui;
 
 import javax.swing.JOptionPane;
 import utp.edu.hdd.librum.dao.DAOLibro;
 import utp.edu.hdd.librum.dto.DTOLibro;
 
-/**
- *
- * @author SONY
- */
 public class EditLibro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EditLibro1
-     */
     public EditLibro() {
         initComponents();
-        pack();                    // Ajusta el tamaño según los componentes
+        pack();
         setLocationRelativeTo(null);
-        
-        
-        
+
     }
 
-    // Nuevo constructor para edición
     public EditLibro(DTOLibro libro) {
         initComponents();
         pack();
         setLocationRelativeTo(null);
 
-        // Rellena los campos con los datos del DTO se sobrecagrn 
         jTextField2.setText(libro.getIsbn());
-        jTextField2.setEditable(false); // ISBN no debería editarse
+        jTextField2.setEditable(false);
         jTextField3.setText(libro.getTitulo());
         jTextArea2.setText(libro.getDescripcion());
         jTextField4.setText(libro.getAutor());
         jTextField6.setText(libro.getGenero());
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -202,28 +188,28 @@ public class EditLibro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAgregarActionPerformed
-        // Lee datos
-    String isbn        = jTextField2.getText();
-    String titulo      = jTextField3.getText();
-    String descripcion = jTextArea2.getText();
-    String autor       = jTextField4.getText();
-    String genero      = jTextField6.getText();
 
-    DTOLibro libro = new DTOLibro(isbn, titulo, descripcion, autor, genero);
-    DAOLibro dao = new DAOLibro();
-    boolean ok = dao.actualizarLibro(libro);
-    if (ok) {
-        JOptionPane.showMessageDialog(this, "Libro actualizado correctamente.");
-        new GestionLibro().setVisible(true);
-        this.dispose();
-    } else {
-        JOptionPane.showMessageDialog(this, "Error al actualizar el libro.");
-    }
+        String isbn = jTextField2.getText();
+        String titulo = jTextField3.getText();
+        String descripcion = jTextArea2.getText();
+        String autor = jTextField4.getText();
+        String genero = jTextField6.getText();
+
+        DTOLibro libro = new DTOLibro(isbn, titulo, descripcion, autor, genero);
+        DAOLibro dao = new DAOLibro();
+        boolean ok = dao.actualizarLibro(libro);
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "Libro actualizado correctamente.");
+            new GestionLibro().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el libro.");
+        }
     }//GEN-LAST:event_JAgregarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        GestionLibro Gli =new GestionLibro();
-         Gli.setVisible(true); // Muestra el formulario Principal
+        GestionLibro Gli = new GestionLibro();
+        Gli.setVisible(true);
         this.dispose();
         setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed

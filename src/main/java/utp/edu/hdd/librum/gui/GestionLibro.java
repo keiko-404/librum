@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package utp.edu.hdd.librum.gui;
 
 import java.util.List;
@@ -10,46 +6,40 @@ import javax.swing.table.DefaultTableModel;
 import utp.edu.hdd.librum.dao.DAOLibro;
 import utp.edu.hdd.librum.dto.DTOLibro;
 
-/**
- *
- * @author SONY
- */
 public class GestionLibro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GestionLibro1
-     */
     public GestionLibro() {
         initComponents();
-        pack();                    // Ajusta el tamaño según los componentes
+        pack();
         setLocationRelativeTo(null);
-        cargarTablaLibros(); // Luego centra la ventana
+        cargarTablaLibros();
     }
 
     private void cargarTablaLibros() {
-    try {
-        String[] columnas = {"ISBN", "Título", "Descripción", "Autor", "Género"};
-        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        try {
+            String[] columnas = {"ISBN", "Título", "Descripción", "Autor", "Género"};
+            DefaultTableModel modelo = new DefaultTableModel(null, columnas);
 
-        DAOLibro dao = new DAOLibro();
-        List<DTOLibro> lista = dao.listarLibros();
+            DAOLibro dao = new DAOLibro();
+            List<DTOLibro> lista = dao.listarLibros();
 
-        for (DTOLibro libro : lista) {
-            Object[] fila = new Object[5];
-            fila[0] = libro.getIsbn();
-            fila[1] = libro.getTitulo();
-            fila[2] = libro.getDescripcion();
-            fila[3] = libro.getAutor();
-            fila[4] = libro.getGenero();
-            modelo.addRow(fila);
+            for (DTOLibro libro : lista) {
+                Object[] fila = new Object[5];
+                fila[0] = libro.getIsbn();
+                fila[1] = libro.getTitulo();
+                fila[2] = libro.getDescripcion();
+                fila[3] = libro.getAutor();
+                fila[4] = libro.getGenero();
+                modelo.addRow(fila);
+            }
+
+            jTable1.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error cargando datos: " + e.getMessage());
         }
-
-        jTable1.setModel(modelo);
-    } catch (Exception e) {
-        e.printStackTrace(); // Muestra el error en consola
-        JOptionPane.showMessageDialog(this, "Error cargando datos: " + e.getMessage());
     }
-}
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -212,83 +202,73 @@ public class GestionLibro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAgregarActionPerformed
-       
-        ArgLibro agregar =new ArgLibro();
-         agregar.setVisible(true); // Muestra el formulario Principal
+
+        ArgLibro agregar = new ArgLibro();
+        agregar.setVisible(true);
         this.dispose();
         setLocationRelativeTo(null);
-        
+
     }//GEN-LAST:event_JAgregarActionPerformed
 
     private void JEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEditarActionPerformed
-     
-       // 1) Comprueba que se haya seleccionado una fila
-    int fila = jTable1.getSelectedRow();
-       
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this, "Selecciona primero un libro en la tabla.");
-        return;
-    }
 
-    // 2) Extrae los datos de esa fila
-    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-    String isbn        = modelo.getValueAt(fila, 0).toString();
-    String titulo      = modelo.getValueAt(fila, 1).toString();
-    String descripcion = modelo.getValueAt(fila, 2).toString();
-    String autor       = modelo.getValueAt(fila, 3).toString();
-    String genero      = modelo.getValueAt(fila, 4).toString();
+        int fila = jTable1.getSelectedRow();
 
-    // 3) Crea el DTO con esos valores
-    DTOLibro libroDTO = new DTOLibro(isbn, titulo, descripcion, autor, genero);
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona primero un libro en la tabla.");
+            return;
+        }
 
-    // 4) Llama al constructor de EditLibro que recibe el DTO
-    EditLibro editar = new EditLibro(libroDTO);
-    editar.setVisible(true);
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        String isbn = modelo.getValueAt(fila, 0).toString();
+        String titulo = modelo.getValueAt(fila, 1).toString();
+        String descripcion = modelo.getValueAt(fila, 2).toString();
+        String autor = modelo.getValueAt(fila, 3).toString();
+        String genero = modelo.getValueAt(fila, 4).toString();
 
-    // 5) Cierra esta ventana
-    this.dispose();
+        DTOLibro libroDTO = new DTOLibro(isbn, titulo, descripcion, autor, genero);
+
+        EditLibro editar = new EditLibro(libroDTO);
+        editar.setVisible(true);
+
+        this.dispose();
     }//GEN-LAST:event_JEditarActionPerformed
 
     private void JEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarActionPerformed
-        // 1) Comprueba que se haya seleccionado una fila
-    int fila = jTable1.getSelectedRow();
-       
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this, "Debes seleccionar primero un libro en la tabla.");
-        return;
-    }
 
-    // 2) Obtén el ISBN (columna 0) de esa fila
-    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-    String isbn = modelo.getValueAt(fila, 0).toString();
-    String Titulo =modelo.getValueAt(fila, 1).toString();
+        int fila = jTable1.getSelectedRow();
 
-    // 3) Pide confirmación al usuario
-    int opcion = JOptionPane.showConfirmDialog(
-        this,
-        "¿Eliminar el libro con ISBN: " + isbn +" "+"con el titulo de :"+" ' "+Titulo+" ' " + "?",
-        "Confirmar eliminación",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.WARNING_MESSAGE
-    );
-    if (opcion != JOptionPane.YES_OPTION) {
-        return; // si no confirma, salir
-    }
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar primero un libro en la tabla.");
+            return;
+        }
 
-    // 4) Llama al DAO para eliminar
-    DAOLibro dao = new DAOLibro();
-    boolean eliminado = dao.eliminarLibro(isbn);
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        String isbn = modelo.getValueAt(fila, 0).toString();
+        String Titulo = modelo.getValueAt(fila, 1).toString();
 
-    // 5) Muestra resultado y recarga tabla
-    if (eliminado) {
-        JOptionPane.showMessageDialog(this, "Libro eliminado correctamente.");
-        cargarTablaLibros();
-    } else {
-        JOptionPane.showMessageDialog(this, "Error al eliminar el libro.");
-    }
-    
-    
-    
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Eliminar el libro con ISBN: " + isbn + " " + "con el titulo de :" + " ' " + Titulo + " ' " + "?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+        if (opcion != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        DAOLibro dao = new DAOLibro();
+        boolean eliminado = dao.eliminarLibro(isbn);
+
+        if (eliminado) {
+            JOptionPane.showMessageDialog(this, "Libro eliminado correctamente.");
+            cargarTablaLibros();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al eliminar el libro.");
+        }
+
+
     }//GEN-LAST:event_JEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

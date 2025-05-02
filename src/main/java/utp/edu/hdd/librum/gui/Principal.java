@@ -1,26 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package utp.edu.hdd.librum.gui;
 
-/**
- *
- * @author SONY
- */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal1
-     */
     public Principal() {
         initComponents();
-         pack();                    // Ajusta el tamaño según los componentes
-    setLocationRelativeTo(null); // Luego centra la ventana
+        pack();
+        setLocationRelativeTo(null);
     }
 
-    
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -141,15 +128,15 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Libro  li = new Libro();
-        li.setVisible(true); // Muestra el formulario Principal
+        Libro li = new Libro();
+        li.setVisible(true);
         this.dispose();
         setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        GestionLibro Gli =new GestionLibro();
-         Gli.setVisible(true); // Muestra el formulario Principal
+        GestionLibro Gli = new GestionLibro();
+        Gli.setVisible(true);
         this.dispose();
         setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed

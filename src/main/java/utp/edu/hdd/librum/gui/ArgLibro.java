@@ -1,29 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 package utp.edu.hdd.librum.gui;
 
 import javax.swing.JOptionPane;
 import utp.edu.hdd.librum.dao.DAOLibro;
 import utp.edu.hdd.librum.dto.DTOLibro;
 
-/**
- *
- * @author SONY
- */
 public class ArgLibro extends javax.swing.JFrame {
 
-    /** Creates new form ArgLibro1 */
     public ArgLibro() {
         initComponents();
-        pack();                    // Ajusta el tamaño según los componentes
+        pack();
         setLocationRelativeTo(null);
-        
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -200,31 +189,30 @@ public class ArgLibro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAgregarActionPerformed
-        String isbn        = jTextField2.getText();
-    String titulo      = jTextField3.getText();
-    String descripcion = jTextArea1.getText();
-    String autor       = jTextField4.getText();
-    String genero      = jTextField6.getText();
-    // 2) Crear el DTO
-    DTOLibro libro = new DTOLibro(isbn, titulo, descripcion, autor, genero);
-  
-    // 3) Llamar a insertarLibro en lugar de actualizarLibro
-    DAOLibro dao = new DAOLibro();
-    boolean ok = dao.insertarLibro(libro);
-    // 4) Mostrar resultado y volver a la gestión
-    if (ok) {
-        JOptionPane.showMessageDialog(this, "El libro se agregó correctamente.");
-        new GestionLibro().setVisible(true);
-        this.dispose();
-    } else {
-        JOptionPane.showMessageDialog(this, "Error al agregar el libro.");
-    }
-    
+        String isbn = jTextField2.getText();
+        String titulo = jTextField3.getText();
+        String descripcion = jTextArea1.getText();
+        String autor = jTextField4.getText();
+        String genero = jTextField6.getText();
+
+        DTOLibro libro = new DTOLibro(isbn, titulo, descripcion, autor, genero);
+
+        DAOLibro dao = new DAOLibro();
+        boolean ok = dao.insertarLibro(libro);
+
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "El libro se agregó correctamente.");
+            new GestionLibro().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al agregar el libro.");
+        }
+
     }//GEN-LAST:event_JAgregarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         GestionLibro Gli =new GestionLibro();
-         Gli.setVisible(true); // Muestra el formulario Principal
+        GestionLibro Gli = new GestionLibro();
+        Gli.setVisible(true);
         this.dispose();
         setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed

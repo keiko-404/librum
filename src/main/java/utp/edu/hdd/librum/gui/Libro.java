@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package utp.edu.hdd.librum.gui;
 
 import java.util.List;
@@ -10,51 +6,40 @@ import javax.swing.table.DefaultTableModel;
 import utp.edu.hdd.librum.dao.DAOLibro;
 import utp.edu.hdd.librum.dto.DTOLibro;
 
-/**
- *
- * @author SONY
- */
 public class Libro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Libro1
-     */
     public Libro() {
         initComponents();
-        pack();                    // Ajusta el tamaño según los componentes
-         setLocationRelativeTo(null);
-         cargarTablaLibros(); // Luego centra la ventana
+        pack();
+        setLocationRelativeTo(null);
+        cargarTablaLibros();
     }
-       
-    
-    
+
     private void cargarTablaLibros() {
-    try {
-        String[] columnas = {"ISBN", "Título", "Descripción", "Autor", "Género"};
-        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        try {
+            String[] columnas = {"ISBN", "Título", "Descripción", "Autor", "Género"};
+            DefaultTableModel modelo = new DefaultTableModel(null, columnas);
 
-        DAOLibro dao = new DAOLibro();
-        List<DTOLibro> lista = dao.listarLibros();
+            DAOLibro dao = new DAOLibro();
+            List<DTOLibro> lista = dao.listarLibros();
 
-        for (DTOLibro libro : lista) {
-            Object[] fila = new Object[5];
-            fila[0] = libro.getIsbn();
-            fila[1] = libro.getTitulo();
-            fila[2] = libro.getDescripcion();
-            fila[3] = libro.getAutor();
-            fila[4] = libro.getGenero();
-            modelo.addRow(fila);
+            for (DTOLibro libro : lista) {
+                Object[] fila = new Object[5];
+                fila[0] = libro.getIsbn();
+                fila[1] = libro.getTitulo();
+                fila[2] = libro.getDescripcion();
+                fila[3] = libro.getAutor();
+                fila[4] = libro.getGenero();
+                modelo.addRow(fila);
+            }
+
+            jTable1.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error cargando datos: " + e.getMessage());
         }
-
-        jTable1.setModel(modelo);
-    } catch (Exception e) {
-        e.printStackTrace(); // Muestra el error en consola
-        JOptionPane.showMessageDialog(this, "Error cargando datos: " + e.getMessage());
     }
-}
 
-
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -186,44 +171,43 @@ public class Libro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBuscarActionPerformed
-       // Obtén el texto ingresado en el campo de búsqueda
-    String textoBusqueda = jTextField3.getText().trim();
-    
-    if (textoBusqueda.isEmpty()) {
-        // Si no se ha ingresado texto, muestra todos los libros
-        cargarTablaLibros();
-    } else {
-        try {
-            String[] columnas = {"ISBN", "Título", "Descripción", "Autor", "Género"};
-            DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        // Obtén el texto ingresado en el campo de búsqueda
+        String textoBusqueda = jTextField3.getText().trim();
 
-            // Llama al método de la DAO para buscar libros por el texto ingresado
-            DAOLibro dao = new DAOLibro();
-            List<DTOLibro> lista = dao.buscarLibrosPorTitulo(textoBusqueda); // Asumiendo que este método existe en tu DAO
+        if (textoBusqueda.isEmpty()) {
 
-            for (DTOLibro libro : lista) {
-                Object[] fila = new Object[5];
-                fila[0] = libro.getIsbn();
-                fila[1] = libro.getTitulo();
-                fila[2] = libro.getDescripcion();
-                fila[3] = libro.getAutor();
-                fila[4] = libro.getGenero();
-                modelo.addRow(fila);
+            cargarTablaLibros();
+        } else {
+            try {
+                String[] columnas = {"ISBN", "Título", "Descripción", "Autor", "Género"};
+                DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+
+                DAOLibro dao = new DAOLibro();
+                List<DTOLibro> lista = dao.buscarLibrosPorTitulo(textoBusqueda);
+
+                for (DTOLibro libro : lista) {
+                    Object[] fila = new Object[5];
+                    fila[0] = libro.getIsbn();
+                    fila[1] = libro.getTitulo();
+                    fila[2] = libro.getDescripcion();
+                    fila[3] = libro.getAutor();
+                    fila[4] = libro.getGenero();
+                    modelo.addRow(fila);
+                }
+
+                jTable1.setModel(modelo);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error cargando datos: " + e.getMessage());
             }
-
-            jTable1.setModel(modelo);
-        } catch (Exception e) {
-            e.printStackTrace(); // Muestra el error en consola
-            JOptionPane.showMessageDialog(this, "Error cargando datos: " + e.getMessage());
         }
-    }
     }//GEN-LAST:event_JBuscarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Principal principal = new Principal();
-            principal.setVisible(true); // Muestra el formulario Principal
-            this.dispose();
-            setLocationRelativeTo(null);       
+        principal.setVisible(true);
+        this.dispose();
+        setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
